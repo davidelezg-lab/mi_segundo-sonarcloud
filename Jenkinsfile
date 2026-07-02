@@ -4,25 +4,18 @@ pipeline {
 
     stages {
 
-        stage('Diagnostico') {
-
-            steps {
-
-                bat 'whoami'
-                bat 'dir "C:\\Users\\DAVID ELEZ\\AppData\\Roaming\\npm"'
-
-            }
-
-        }
-
         stage('Compilar') {
 
             steps {
 
-                bat 'g++ main.cpp -o app.exe'
+                bat '''
+                "C:\\msys64\\ucrt64\\bin\\g++.exe" main.cpp -o app.exe
 
+                if not exist app.exe exit /b 1
+
+                exit /b 0
+                '''
             }
-
         }
 
         stage('Analisis SonarCloud') {
@@ -31,14 +24,24 @@ pipeline {
 
                 withSonarQubeEnv('SonarCloud') {
 
-                    bat '"C:\\Users\\DAVID ELEZ\\AppData\\Roaming\\npm\\sonar-scanner.cmd"'
+                    bat '"C:\\sonar-scanner\\bin\\sonar-scanner.bat"'
 
                 }
 
             }
+        }
 
+        stage('Quality Gate') {
+
+            steps {
+
+                timeout(time: 5, unit: 'MINUTES') {
+
+                    waitForQualityGate abortPipeline: true
+
+                }
+
+            }
         }
 
     }
-
-}
