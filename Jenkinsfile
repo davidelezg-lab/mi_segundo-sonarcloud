@@ -4,6 +4,18 @@ pipeline {
 
     stages {
 
+        stage('Diagnostico') {
+
+            steps {
+
+                bat 'whoami'
+                bat 'where sonar-scanner'
+                bat 'echo %PATH%'
+
+            }
+
+        }
+
         stage('Compilar') {
 
             steps {
@@ -18,8 +30,9 @@ pipeline {
 
             steps {
 
-                bat 'whoami'
-		bat 'echo %PATH%'
+                withSonarQubeEnv('SonarCloud') {
+
+                    bat '"C:\\Users\\DAVID ELEZ\\AppData\\Roaming\\npm\\sonar-scanner.cmd"'
 
                 }
 
