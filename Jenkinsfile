@@ -9,8 +9,7 @@ pipeline {
             steps {
 
                 bat 'whoami'
-                bat 'where sonar-scanner'
-                bat 'echo %PATH%'
+                bat 'dir "C:\\Users\\DAVID ELEZ\\AppData\\Roaming\\npm"'
 
             }
 
@@ -43,4 +42,3 @@ pipeline {
     }
 
 }
-
