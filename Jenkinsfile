@@ -7,7 +7,7 @@ pipeline {
         stage('Compilar') {
             steps {
                 bat '''
-                "C:\msys64\ucrt64\bin\g++.exe" main.cpp -o app.exe
+                '"C:\msys64\ucrt64\bin\g++.exe"' main.cpp -o app.exe
 
                 if not exist app.exe exit /b 1
 
