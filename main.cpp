@@ -1,8 +1,7 @@
 #include <iostream>
 
-int main() {
+int suma(int a, int b){return a+b;}
 
-    std::cout << "Hola SonarCloud" << std::endl;
-
-    return 0;
+int main(){
+    std::cout << suma(2,3);
 }
