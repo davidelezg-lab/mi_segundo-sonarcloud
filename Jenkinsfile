@@ -18,9 +18,8 @@ pipeline {
 
             steps {
 
-                withSonarQubeEnv('SonarCloud') {
-
-                    bat 'sonar-scanner'
+                bat 'whoami'
+		bat 'echo %PATH%'
 
                 }
 
